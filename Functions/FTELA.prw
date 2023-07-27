@@ -1,7 +1,7 @@
 #Include 'Totvs.ch'
 
 /*/{Protheus.doc} fTela
-   @description: 
+   @description: Base para desenvolvimento de telas
    @type: User Function
    @author: diogogaspdev
    @since: 25/07/2023

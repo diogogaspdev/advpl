@@ -11,13 +11,26 @@
 /*/
 User Function fRELAT(cAlias, cNome, cDir)
     
-    Local aCampos := (cAlias)->(DbStruct())
     Local nX      := 0
+    Local aCampos := {}
     Local aRow    := {}
     Local cArq    := ''
     Local lRet    := .F.
 
-    Default cDir := GetTempPath()
+    Default cDir  := GetTempPath()
+    Default cNome := DToS(dDataBase) + "_" + StrTran(Time(), ':', '-')
+
+    If Empty(cAlias) .Or. Select(cAlias) == 0
+        MsgStop("Alias Invalido ou nao aberto!", "Atencao")
+        Return
+    EndIf
+
+    If !ExistDir(cDir)
+        MsgStop("Diretorio invalido!", "Atencao")
+        Return
+    EndIf
+
+    aCampos := (cAlias)->(DbStruct())
 
     (cAlias)->(DbGoTop())
 
@@ -43,7 +56,7 @@ User Function fRELAT(cAlias, cNome, cDir)
         
     EndDo
 
-    cArq := cNome + DToS(dDataBase) + "_" + StrTran(Time(), ':', '-') + ".xml" 
+    cArq := cNome + ".xml" 
 
     oExcel:Activate()
 

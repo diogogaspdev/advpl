@@ -1,7 +1,7 @@
-#INCLUDE "RwMake.CH"
-#INCLUDE "PROTHEUS.CH"
-#INCLUDE "APWIZARD.CH"
-#INCLUDE "AP5MAIL.CH"
+#Include "RwMake.CH"
+#Include "Protheus.ch"
+#Include "Apwizard.ch"
+#Include "Ap5mail.ch"
 
 /*
 ‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹

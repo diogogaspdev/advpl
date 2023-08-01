@@ -1,4 +1,5 @@
-#Include 'Totvs.ch'
+#Include "Protheus.ch"
+#Include "Totvs.ch"
 
 /*/{Protheus.doc} fTela
    @description: Base para desenvolvimento de telas

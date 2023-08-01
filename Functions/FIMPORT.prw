@@ -1,8 +1,7 @@
-#INCLUDE 'PROTHEUS.CH'
-#INCLUDE 'TOTVS.CH'
-#include "rwmake.ch"
+#Include "Protheus.ch"
+#Include "Totvs.ch"
+#Include "Rwmake.ch"
 #Include "TopConn.ch"
-
 
 /*/{Protheus.doc} fIMPORT
    @description: Funcao que importa um array ou um arquivo csv 

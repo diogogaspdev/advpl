@@ -1,375 +1,346 @@
 {
-    "IfCerto": {
-        "prefix": "If",
-        "body": [
-            "If ${1:conditions}",
-            "    $0",
-            "EndIf"
-        ]
-    },
-    "ForCerto": {
-        "prefix": "For",
-        "body": [
-            "For ${1:nX} := 1 To ${2:conditions}",
-            "    $0",
-            "Next ${1:nX}"
-        ]
-    },
-    "WhileCerto": {
-        "prefix": "While",
-        "body": [
-            "While ${1:conditions}",
-            "    $0",
-            "EndDo"
-        ]
-    },
-    "QueryCerto": {
-        "prefix": "Query",
-        "body": [
-            "Local cQuery    := ''",
-            "Local cAliasTMP := ''",
-            "",
-            "cQuery := \" $1 \" + CRLF",
-            "cQuery += \"     $0 \" + CRLF",
-            "cQuery += \" WHERE \" + CRLF",
-            "cQuery += \"     D_E_L_E_T_ = ' ' \" + CRLF",
-            "",
-            "cAliasTMP := GetNextAlias()",
-            "MPSysOpenQuery(cQuery, cAliasTMP)",
-            "",
-            "While (cAliasTMP)->(!EoF())",
-            "    ",
-            "    (cAliasTMP)->(DbSkip())",
-            "EndDo",
-            "",
-            "(cAliasTMP)->(DbCloseArea())"
-        ]
-    },
-    "RecLockCerto": {
-        "prefix": "RecLock",
-        "body": [
-            "RecLock('${1:table}', ${2:new})",
-            "    $0",
-            "${1:table}->(MsUnlock())"
-        ]
-    },
-    "IfElseCerto": {
-        "prefix": "IfElse",
-        "body": [
-            "If ${1:conditions}",
-            "    $0",
-            "Else",
-            "    ",
-            "EndIf"
-        ]
-    },
-    "ElseIfCerto": {
-        "prefix": "ElseIf",
-        "body": [
-            "If ${1:conditions}",
-            "    $2",
-            "ElseIf $3",
-            "    $0",
-            "EndIf"
-        ]
-    },
-    "ProcessaCerto": {
-        "prefix": "Processa",
-        "body": [
-            "Processa({|| ${1:function}() }, '${2:holder}')"
-        ]
-    },
-    "ParamBoxCerto": {
-        "prefix": "ParamBox",
-        "body": [
-            "aAdd(aParamBox, {1, /*cDescri*/, /*cInicializador*/, /*cMascara*/, /*cF3*/, /*cValidacao*/, /*nTamanho*/, /*lObriga*/}) //Get",
-            "aAdd(aParamBox, {2, /*cDescri*/, /*nInicializador*/, /*aArray*/, /*nTamanho*/, /*cValidacao*/, /*lObriga*/}) //Combo",
-            "aAdd(aParamBox, {4, /*cDescri*/, /*lInicializador*/, /*cSay*/, /*nTamanho*/, /*cValidacao*/, /*lObriga*/}) //Say + CheckBox",
-            "aAdd(aParamBox, {5, /*cDescri*/, /*lInicializador*/, /*nTamanho*/, /*cValidacao*/, /*lObriga*/}) //CheckBox",
-            "aAdd(aParamBox, {6, /*cDescri*/, /*cInicializador*/, /*cMascara*/, /*cValidacao*/, /*cValidacao2*/, /*nTamanho*/, /*lObriga*/, 'Todos os arquivos (*.*) |*.*' /*cTipoArq*/, /*cDirIni*/, /*?*/}) //File",
-            "",
-            "If Parambox(aParamBox, /*cTitle*/)",
-            "    ",
-            "EndIf"
-        ]
-    },
-    "aAddCerto": {
-        "prefix": "aAdd",
-        "body": [
-            "aAdd(${1:aArray}, $0)"
-        ]
-    },
-    "UserCerto": {
-        "prefix": "User",
-        "body": [
-            "#Include 'Totvs.ch'",
-            "",
-            "/*/{Protheus.doc} ${1:nomeFunction}",
-            "   @description: ",
-            "   @type: User Function",
-            "   @author: SEU NOME",
-            "   @OS: ",
-            "   @since: $CURRENT_DATE/$CURRENT_MONTH/$CURRENT_YEAR",
-            "/*/",
-            "User Function ${1:nomeFunction}()",
-            "    $0",
-            "Return"
-        ]
-    },
-    "StaticCerto": {
-        "prefix": "Static",
-        "body": [
-            "/*/{Protheus.doc} ${1:nomeFunction}",
-            "   @description: ",
-            "   @type: Static Function",
-            "   @author: SEU NOME",
-            "   @OS: ",
-            "   @since: $CURRENT_DATE/$CURRENT_MONTH/$CURRENT_YEAR",
-            "/*/",
-            "Static Function ${1:nomeFunction}()",
-            "    $0",
-            "Return"
-        ]
-    },
-    "LenCerto": {
-        "prefix": "Len",
-        "body": [
-            "Len(${0:xVar})"
-        ]
-    },
-    "DbSkipCerto": {
-        "prefix": "DbSkip",
-        "body": [
-            "${0:xTab}->(DbSkip())"
-        ]
-    },
-    "ExitCerto": {
-        "prefix": "Exit",
-        "body": [
-            "Exit"
-        ]
-    },
-    "LoopCerto": {
-        "prefix": "Loop",
-        "body": [
-            "Loop"
-        ]
-    },
-    "StrTranCerto": {
-        "prefix": "StrTran",
-        "body": [
-            "StrTran(${1:cString}, \"$2\", \"$0\")"
-        ]
-    },
-    "SubStrCerto": {
-        "prefix": "SubStr",
-        "body": [
-            "SubStr(${1:cString}, \"$2\", \"$0\")"
-        ]
-    },
-    "MsgAlertCerto": {
-        "prefix": "MsgAlert",
-        "body": [
-            "MsgAlert(\"$1\", \"$0\")"
-        ]
-    },
-    "MsgStopCerto": {
-        "prefix": "MsgStop",
-        "body": [
-            "MsgStop(\"$1\", \"$0\")"
-        ]
-    },
-    "MsgInfoCerto": {
-        "prefix": "MsgInfo",
-        "body": [
-            "MsgInfo(\"$1\", \"$0\")"
-        ]
-    },
-    "RpcSetTypeCerto": {
-        "prefix": "RpcSetType",
-        "body": [
-            "If Empty(FunName())",
-            "    RpcSetType(3)",
-            "    RpcSetEnv('$1', '$0')",
-            "EndIf"
-        ]
-    },
-    "MsgYesNoCerto": {
-        "prefix": "MsgYesNo",
-        "body": [
-            "MsgYesNo(\"$1\", \"$2\")"
-        ]
-    },
-    "GetTempPathCerto": {
-        "prefix": "GetTempPath",
-        "body": [
-            "GetTempPath()"
-        ]
-    },
-    "BeginTransactionCerto": {
-        "prefix": "Begin",
-        "body": [
-            "BEGIN TRANSACTION",
-            "",
-            "END TRANSACTION"
-        ]
-    },
-    "GetFileCerto": {
-        "prefix": "cGetFile",
-        "body": [
-            "cGetFile( '*.csv|*.csv' , 'Selecione', 1, 'C:\\', .F., nOR( GETF_LOCALHARD, GETF_LOCALFLOPPY, GETF_RETDIRECTORY ),.T., .T. )"
-        ]
-    },
-    "RetSQLNameCerto": {
-        "prefix": "RetSQLName",
-        "body": [
-            "cQuery += \"     \" + RetSqlName(\"$0\") + \" $0 \" + CRLF"
-        ]
-    },
-    "FilialCerto": {
-        "prefix": "Filial",
-        "body": [
-            "cQuery += \"     AND $0_FILIAL = '\" + xFilial(\"$0\") + \"' \" + CRLF"
-        ]
-    },
-    "InnerJoinCerto": {
-        "prefix": "Inner Join",
-        "body": [
-            "cQuery += \" INNER JOIN \" + RetSQLName(\"$0\") + \" $0 ON     \" + CRLF",
-            "cQuery += \"     $0.$0_FILIAL = '\" + xFilial(\"$0\") + \"'    \" + CRLF",
-            "cQuery += \"     $0.D_E_L_E_T_ = ' '                        \" + CRLF"
-        ]
-    },
-    "xFilialCerto": {
-        "prefix": "xFilial",
-        "body": [
-            "xFilial(\"$0\")"
-        ]
-    },
-    "DbSeekCerto": {
-        "prefix": "DbSeek",
-        "body": [
-            "${1:xTab}->(DbSeek(xFilial(\"${1:xTab}\") + $0))"
-        ]
-    },
-    "DbCloseCerto": {
-        "prefix": "DbCloseArea",
-        "body": [
-            "${0:xTab}->(DbCloseArea())"
-        ]
-    },
-    "DbSelectAreaCerto": {
-        "prefix": "DbSelectArea",
-        "body": [
-            "DbSelectArea($0)"
-        ]
-    },
-    "DbSetOrderCerto": {
-        "prefix": "DbSetOrder",
-        "body": [
-            "${1:xTab}->(DbSetOrder($0))"
-        ]
-    },
-    "MsgRunCerto": {
-        "prefix": "MsgRun",
-        "body": [
-            "MsgRun(\"${1:Aguardando}...\", \"${2:Titulo}\", {|| $0})"
-        ]
-    },
-    "DbDeleteCerto": {
-        "prefix": "DbDelete",
-        "body": [
-            "${0:xTab}->(DbDelete())"
-        ]
-    },
-    "DbGoToCerto": {
-        "prefix": "DbGoTo",
-        "body": [
-            "${1:xTab}->(DbGoTo($0))"
-        ]
-    },
-    "PosicioneCerto": {
-        "prefix": "Posicione",
-        "body": [
-            "Posicione(\"${1:cAlias}\", ${2:nIndice}, xFilial(\"${1:cAlias}\") + $0, ${3:cCampo})"
-        ]
-    },
-    "IIFCerto": {
-        "prefix": "IIF",
-        "body": [
-            "IF(${1:xExpressao}, $2, $0)"
-        ]
-    },
-    "DbGoTopCerto": {
-        "prefix": "DbGoTop",
-        "body": [
-            "${0:xTab}->(DbGoTop())"
-        ]
-    },
-    "EoFCerto": {
-        "prefix": "EoF",
-        "body": [
-            "(${0:xTab})->(!EoF())"
-        ]
-    },
-    "JsonObjectCerto": {
-        "prefix": "JsonObject",
-        "body": [
-            "JsonObject():New()"
-        ]
-    },
-    "MsDialogCerto": {
-        "prefix": "MsDialog",
-        "body": [
-            "Private cGet1    := \"\"",
-            "Private cMultG1  := \"\"",
-            "Private cCombBx1 := \"\"",
-            "Private aList1   := {}",
-            "Private lCheck1  := .F.",
-            "",
-            "Private oOk := LoadBitmap(GetResources(), \"br_verde\")",
-            "Private oNo := LoadBitmap(GetResources(), \"br_vermelho\")",
-            "",
-            "Private oFont1 := TFont():New( 'Arial' /*cName*/,, 15 /*nHeight*/,, .F. /*lBold*/,,,,, .F. /*lUnderline*/, .F. /*lItalic*/ )",
-            "",
-            "Private oDlg     As Object",
-            "Private oGet1    As Object",
-            "Private oGrp1    As Object",
-            "Private oBrowse1 As Object",
-            "Private oBtn1    As Object",
-            "Private oSay1    As Object",
-            "Private oCheck1  As Object",
-            "Private oMultG1  As Object",
-            "Private oCombBx1 As Object",
-            "",
-            "aAdd(aList1, {.T., ''})",
-            "aAdd(aList1, {.F., ''})",
-            "",
-            "oDlg := MsDialog():New( 0 /*nTop*/, 0 /*nLeft*/, 590 /*nBottom*/, 1300 /*nRight*/, /*cTitulo*/,,,,, /*nClrText*/, /*nClrBack*/,, /*oWnd*/, .T. /*lPixel*/,,,, /*lTransparent*/ )",
-            "",
-            "    oGet1 := TGet():New( 10 /*nRow*/, 10 /*nCol*/, {|u| if( Pcount()>0, cGet1 := u, cGet1) } /*bSetGet*/, oDlg /*oWnd*/, 100 /*nWidth*/, 10 /*nHeight*/, /*cPict*/, /*bValid*/, /*nClrFore*/, /*nClrBack*/, /*oFont*/,,, .T. /*lPixel*/,,, /*bWhen*/,,, /*bChange*/, /*lReadOnly*/, /*lPassword*/,, /*cReadVar*/,,,, /*lHasButton*/, /*lNoButton*/,, 'cGet1' /*cLabelText*/, /*nLabelPos*/, /*oLabelFont*/, /*nLabelColor*/, 'cGet1' /*cPlaceHold*/, /*lPicturePriority*/, /*lFocSel*/ )",
-            "",
-            "    oGrp1 := TGroup():New( 146 /*nTop*/, 10 /*nLeft*/, 290 /*nBottom*/, 640 /*nRight*/, 'oGrp1' /*cCaption*/, oDlg /*oWnd*/, /*nClrText*/, /*nClrPane*/, .T. /*lPixel*/, )",
-            "",
-            "    oBrowse1 := TCBrowse():New( 152 /*nRow*/, 12 /*nCol*/, 626 /*nWidth*/, 136 /*nHeight*/, /*bLine*/, {'', ''} /*aHeaders*/, /*aColSizes*/, oGrp1 /*oWnd*/, /*cField*/, /*uValue1*/, /*uValue2*/, /*bChange*/, /*bLDblClick*/, /*bRClicked*/, oFont1 /*oFont*/, /*oCursor*/, /*nClrFore*/, /*nClrBack*/, /*cMsg*/,, /*cAlias*/, .T. /*lPixel*/, /*bWhen*/,, /*bValid*/, /*lHScroll*/, /*lVScroll*/ )",
-            "",
-            "    oBrowse1:SetArray(aList1)",
-            "        oBrowse1:bLine := {||{;",
-            "        If(aList1[oBrowse1:nAt,01], oOK, oNo),;",
-            "        aList1[oBrowse1:nAt,02],;",
-            "    }}",
-            "",
-            "    oBtn1 := TButton():New( 10 /*nRow*/, 150 /*nCol*/, 'oBtn1' /*cCaption*/, oDlg /*oWnd*/, /*bAction*/, 50 /*nWidth*/, 12 /*nHeight*/,, oFont1 /*oFont*/,, .T. /*lPixel*/,,,, /*bWhen*/,, )",
-            "",
-            "    oSay1 := TSay():New( 10 /*nRow*/, 210 /*nCol*/, {|| 'oSay1'} /*bText*/, oDlg /*oWnd*/, /*cPicture*/, oFont1 /*oFont*/,,,, .T. /*lPixels*/, /*nClrText*/, /*nClrBack*/, 50 /*nWidth*/, 12 /*nHeight*/,,,,,, /*lHTML*/, /*nTxtAlgHor*/, /*nTxtAlgVer*/ )",
-            "",
-            "    oCheck1 := TCheckBox():New( 10 /*nRow*/, 240 /*nCol*/, 'oCheck1' /*cCaption*/, {|u|If(Pcount()>0,lCheck1:=u,lCheck1)} /*bSetGet*/, oDlg /*oWnd*/, 10 /*nWidth*/, 10 /*nHeight*/,, /*bLClicked*/, oFont1 /*oFont*/, /*bValid*/, /*nClrText*/, /*nClrPane*/,, .T. /*lPixel*/, 'oCheck1' /*cMsg*/,, /*bWhen*/ )",
-            "",
-            "    oMultG1 := TMultiGet():New( 10 /*nRow*/, 300 /*nCol*/, {|u| If(Pcount()>0,cMultG1:=u,cMultG1)} /*bSetGet*/, oDlg /*oWnd*/, 100 /*nWidth*/, 100 /*nHeight*/, oFont1 /*oFont*/,,,,, .T. /*lPixel*/,,, /*bWhen*/,,, /*lReadOnly*/, /*bValid*/,,, /*lNoBorder*/, /*lVScroll*/, 'oMultGet1' /*cLabelText*/, /*nLabelPos*/, /*oLabelFont*/, /*nLabelColor*/ )",
-            "",
-            "    oCombBx1 := TComboBox():New( 10 /*nRow*/, 360 /*nCol*/, {|u|if(Pcount()>0,cCombBx1:=u,cCombBx1)} /*bSetGet*/, {'S=Sim', 'N=Nao'} /*nItens*/, 100 /*nWidth*/, 10 /*nHeight*/, oDlg /*oWnd*/,, /*bChange*/, /*bValid*/, /*nClrText*/, /*nClrBack*/, .T. /*lPixel*/, /*oFont*/,,, /*bWhen*/,,,,, /*cReadVar*/, 'oCombBx1' /*cLabelText*/, /*nLabelPos*/, /*oLabelFont*/, /*nLabelColor*/ )",
-            "",
-            "oDlg:Activate( ,,, .T. /*lCentered*/, /*bValid*/,, /*bInit*/,, )"
-        ]
-    }
+	// Place your snippets for advpl here. Each snippet is defined under a snippet name and has a prefix, body and 
+	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+	// same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+	"IfCerto": {
+		"prefix": "If",
+		"body": [
+			"If ${1:conditions}",
+			"    $0",
+			"EndIf"
+		]
+	},
+	"ForCerto": {
+		"prefix": "For",
+		"body": [
+			"For ${1:nX} := 1 To ${2:conditions}",
+			"    $0",
+			"Next ${1:nX}"
+		]
+	},
+	"WhileCerto": {
+		"prefix": "While",
+		"body": [
+			"While ${1:conditions}",
+			"    $0",
+			"EndDo"
+		]
+	},
+	"QueryCerto": {
+		"prefix": "Query",
+		"body": [
+			"Local cQuery    := ''",
+			"Local cAliasTMP := ''",
+			"",
+			"cQuery := \" SELECT \" + CRLF",
+			"cQuery += \"     * \" + CRLF",
+			"cQuery += \" FROM \" + CRLF",
+			"cQuery += \" WHERE \" + CRLF",
+			"cQuery += \"     D_E_L_E_T_ = ' ' \" + CRLF",
+			"",
+			"cAliasTMP := GetNextAlias()",
+			"MPSysOpenQuery(cQuery, cAliasTMP)",
+			"",
+			"While (cAliasTMP)->(!EoF())",
+			"    ",
+			"    (cAliasTMP)->(DbSkip())",
+			"EndDo",
+			"",
+			"(cAliasTMP)->(DbCloseArea())"
+		]
+	},
+	"RecLockCerto": {
+		"prefix": "RecLock",
+		"body": [
+			"RecLock('${1:table}', ${2:new})",
+			"    $0",
+			"${1:table}->(MsUnlock())"
+		]
+	},
+	"IfElseCerto": {
+		"prefix": "IfElse",
+		"body": [
+			"If ${1:conditions}",
+			"    $0",
+			"Else",
+			"    ",
+			"EndIf"
+		]
+	},
+	"ElseIfCerto": {
+		"prefix": "ElseIf",
+		"body": [
+			"If ${1:conditions}",
+			"    $2",
+			"ElseIf $3",
+			"    $0",
+			"EndIf"
+		]
+	},
+	"ProcessaCerto": {
+		"prefix": "Processa",
+		"body": [
+			"Processa({|| ${1:function}() }, '${2:holder}')"
+		]
+	},
+	"ParamBoxCerto": {
+		"prefix": "ParamBox",
+		"body": [
+			"Local aParamBox := {}",
+			" ",
+			"aAdd(aParamBox, {1, '' /*cDescri*/, Ctod(Space(8)) /*xIni*/, '' /*cMascara*/, '' /*cValid*/, '' /*cF3*/, '' /*cWhen*/, 50 /*nTamanho*/, .F. /*lObrig*/}) //MsGet",
+			"aAdd(aParamBox, {2, '' /*cDescri*/, 1 /*nIni*/, {'S=Nao', 'N=Nao'} /*aCombo*/, 50 /*nTamanho*/, '' /*cValid*/, .F. /*lObrig*/}) //Combo",
+			"aAdd(aParamBox, {4, '' /*cDescri*/, .F. /*lIni*/, '' /*cCheckBox*/, 90 /*nTamanho*/, '' /*cValid*/, .F. /*lObrig*/}) //Say + CheckBox",
+			"aAdd(aParamBox, {5, '' /*cDescri*/, .F. /*lIni*/, 50 /*nTamanho*/, '' /*cValid*/, .F. /*lObrig*/}) //CheckBox",
+			"aAdd(aParamBox, {6, '' /*cDescri*/, Space(50) /*cIni*/, '' /*cMascara*/, '' /*cValid*/, '' /*cWhen*/, 50 /*nTamanho*/, .F. /*lObrig*/, 'Todos os arquivos (*.*) |*.*' /*cTipo*/, '' /*cIniDir*/, nOR( GETF_LOCALHARD, GETF_LOCALFLOPPY, GETF_RETDIRECTORY ) /*xParams*/}) //File",
+			"aAdd(aParamBox, {11,'' /*cDescri*/, '' /*cIni*/, '' /*cValid*/, '' /*cWhen*/, .F. /*lObrig*/}) //Memo",
+			"",
+			"If Parambox(aParamBox, '' /*cTitle*/,, {|| .T.} /*bValid*/)",
+			"    ",
+			"EndIf"
+		]
+	},
+	"aAddCerto": {
+		"prefix": "aAdd",
+		"body": [
+			"aAdd(${1:aArray}, $0)"
+		]
+	},
+	"UserCerto":{
+		"prefix": "User",
+		"body": [
+			"#Include 'Totvs.ch'",
+			"",
+			"/*/{Protheus.doc} ${1:nomeFunction}",
+			"   @description: ",
+			"   @type: User Function",
+			"   @author: SEU NOME",
+			"   @OS: ",
+			"   @since: $CURRENT_DATE/$CURRENT_MONTH/$CURRENT_YEAR",
+			"/*/",
+			"User Function ${1:nomeFunction}()",
+			"    $0",
+			"Return"
+		]
+	},
+	"StaticCerto":{
+		"prefix": "Static",
+		"body": [
+			"/*/{Protheus.doc} ${1:nomeFunction}",
+			"   @description: ",
+			"   @type: Static Function",
+			"   @author: SEU NOME",
+			"   @OS: ",
+			"   @since: $CURRENT_DATE/$CURRENT_MONTH/$CURRENT_YEAR",
+			"/*/",
+			"Static Function ${1:nomeFunction}()",
+			"    $0",
+			"Return"
+		]
+	},
+	"LenCerto": {
+		"prefix": "Len",
+		"body": [
+			"Len(${0:xVar})"
+		]
+	},
+	"DbSkipCerto": {
+		"prefix": "DbSkip",
+		"body": [
+			"${0:xTab}->(DbSkip())"
+		]
+	},
+	"ExitCerto": {
+		"prefix": "Exit",
+		"body": [
+			"Exit"
+		]
+	},
+	"LoopCerto": {
+		"prefix": "Loop",
+		"body": [
+			"Loop"
+		]
+	},
+	"StrTranCerto": {
+		"prefix": "StrTran",
+		"body": [
+			"StrTran(${1:cString}, \"$2\", \"$0\")"
+		]
+	},
+	"SubStrCerto": {
+		"prefix": "SubStr",
+		"body": [
+			"SubStr(${1:cString}, \"$2\", \"$0\")"
+		]
+	},
+	"MsgAlertCerto": {
+		"prefix": "MsgAlert",
+		"body": [
+			"MsgAlert(\"$1\", \"$0\")"
+		]
+	},
+	"MsgStopCerto": {
+		"prefix": "MsgStop",
+		"body": [
+			"MsgStop(\"$1\", \"$0\")"
+		]
+	},
+	"MsgInfoCerto": {
+		"prefix": "MsgInfo",
+		"body": [
+			"MsgInfo(\"$1\", \"$0\")"
+		]
+	},
+	"RpcSetTypeCerto": {
+		"prefix": "RpcSetType",
+		"body": [
+			"If Empty(FunName())",
+			"    RpcSetType(3)",
+			"    RpcSetEnv('$1', '$0')",
+			"EndIf"
+		]
+	},
+	"MsgYesNoCerto": {
+		"prefix": "MsgYesNo",
+		"body": [
+			"MsgYesNo(\"$1\", \"$2\")"
+		]
+	},
+	"GetTempPathCerto": {
+		"prefix": "GetTempPath",
+		"body": [
+			"GetTempPath()"
+		]
+	},
+	"BeginTransactionCerto": {
+		"prefix": "Begin",
+		"body": [
+			"BEGIN TRANSACTION",
+			"",
+			"END TRANSACTION"
+		]
+	},
+	"GetFileCerto": {
+		"prefix": "cGetFile",
+		"body": [
+			"cGetFile( '*.csv|*.csv' , 'Selecione', 1, 'C:\\', .F., nOR( GETF_LOCALHARD, GETF_LOCALFLOPPY, GETF_RETDIRECTORY ),.T., .T. )"
+		]
+	},
+	"RetSQLNameCerto": {
+		"prefix": "RetSQLName",
+		"body": [
+			"cQuery += \"     \" + RetSqlName(\"$0\") + \" $0 \" + CRLF"
+		]
+	},
+	"FilialCerto": {
+		"prefix": "Filial",
+		"body": [
+			"cQuery += \"     AND $0_FILIAL = '\" + xFilial(\"$0\") + \"' \" + CRLF"
+		]
+	},
+	"InnerJoinCerto": {
+		"prefix": "Inner Join",
+		"body": [
+			"cQuery += \" INNER JOIN \" + RetSQLName(\"$0\") + \" $0 ON     \" + CRLF",
+			"cQuery += \"     $0.$0_FILIAL = '\" + xFilial(\"$0\") + \"'    \" + CRLF",
+			"cQuery += \"     $0.D_E_L_E_T_ = ' '                        \" + CRLF"
+		]
+	},
+	"xFilialCerto": {
+		"prefix": "xFilial",
+		"body": [
+			"xFilial(\"$0\")"
+		]
+	},
+	"DbSeekCerto": {
+		"prefix": "DbSeek",
+		"body": [
+			"${1:xTab}->(DbSeek(xFilial(\"${1:xTab}\") + $0))"
+		]
+	},
+	"DbCloseCerto": {
+		"prefix": "DbCloseArea",
+		"body": [
+			"${0:xTab}->(DbCloseArea())"
+		]
+	},
+	"DbSelectAreaCerto": {
+		"prefix": "DbSelectArea",
+		"body": [
+			"If Select('$0') == 0",
+			"    DbSelectArea('$0')",
+			"EndIf"
+		]
+	},
+	"DbSetOrderCerto": {
+		"prefix": "DbSetOrder",
+		"body": [
+			"${1:xTab}->(DbSetOrder($0))"
+		]
+	},
+	"MsgRunCerto": {
+		"prefix": "MsgRun",
+		"body": [
+			"MsgRun(\"${1:Aguardando}...\", \"${2:Titulo}\", {|| $0})"
+		]
+	},
+	"DbDeleteCerto": {
+		"prefix": "DbDelete",
+		"body": [
+			"${0:xTab}->(DbDelete())"
+		]
+	},
+	"DbGoToCerto": {
+		"prefix": "DbGoTo",
+		"body": [
+			"${1:xTab}->(DbGoTo($0))"
+		]
+	},
+	"PosicioneCerto": {
+		"prefix": "Posicione",
+		"body": [
+			"Posicione(\"${1:cAlias}\", ${2:nIndice}, xFilial(\"${1:cAlias}\") + $0, ${3:cCampo})"
+		]
+	},
+	"IIFCerto": {
+		"prefix": "IIF",
+		"body": [
+			"IF(${1:xExpressao}, $2, $0)"
+		]
+	},
+	"DbGoTopCerto": {
+		"prefix": "DbGoTop",
+		"body": [
+			"${0:xTab}->(DbGoTop())"
+		]
+	},
+	"EoFCerto": {
+		"prefix": "EoF",
+		"body": [
+			"(${0:xTab})->(!EoF())"
+		]
+	},
+	"JsonObjectCerto": {
+		"prefix": "JsonObject",
+		"body": [
+			"JsonObject():New()"
+		]
+	},
+	"TFileDialogCerto": {
+		"prefix": "TFileDialog",
+		"body": [
+			"TFileDialog( 'All files (*) | All Text files (*.txt)' /*cMascar*/, '' /*cTitulo*/,, '' /*cDirInicial*/, .T. /*lSalvar*/, /*nOpcoes*/) //GETFMULTISELECT //GETF_RETDIRECTORY ",
+		]
+	},
 }

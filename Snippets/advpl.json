@@ -1,17 +1,4 @@
 {
-	// Place your snippets for advpl here. Each snippet is defined under a snippet name and has a prefix, body and 
-	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
-	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
-	// same ids are connected.
-	// Example:
-	// "Print to console": {
-	// 	"prefix": "log",
-	// 	"body": [
-	// 		"console.log('$1');",
-	// 		"$2"
-	// 	],
-	// 	"description": "Log output to console"
-	// }
 	"IfCerto": {
 		"prefix": "If",
 		"body": [
@@ -116,7 +103,7 @@
 			"aAdd(${1:aArray}, $0)"
 		]
 	},
-	"UserCerto":{
+	"UserCerto": {
 		"prefix": "User",
 		"body": [
 			"#Include 'Totvs.ch'",
@@ -133,7 +120,7 @@
 			"Return"
 		]
 	},
-	"StaticCerto":{
+	"StaticCerto": {
 		"prefix": "Static",
 		"body": [
 			"/*/{Protheus.doc} ${1:nomeFunction}",
@@ -157,7 +144,7 @@
 	"DbSkipCerto": {
 		"prefix": "DbSkip",
 		"body": [
-			"${0:xTab}->(DbSkip())"
+			"(${0:xTab})->(DbSkip())"
 		]
 	},
 	"ExitCerto": {
@@ -266,13 +253,13 @@
 	"DbSeekCerto": {
 		"prefix": "DbSeek",
 		"body": [
-			"${1:xTab}->(DbSeek(xFilial(\"${1:xTab}\") + $0))"
+			"(${1:xTab})->(DbSeek(xFilial(\"${1:xTab}\") + $0))"
 		]
 	},
 	"DbCloseCerto": {
 		"prefix": "DbCloseArea",
 		"body": [
-			"${0:xTab}->(DbCloseArea())"
+			"(${0:xTab})->(DbCloseArea())"
 		]
 	},
 	"DbSelectAreaCerto": {
@@ -286,7 +273,7 @@
 	"DbSetOrderCerto": {
 		"prefix": "DbSetOrder",
 		"body": [
-			"${1:xTab}->(DbSetOrder($0))"
+			"(${1:xTab})->(DbSetOrder($0))"
 		]
 	},
 	"MsgRunCerto": {
@@ -298,13 +285,13 @@
 	"DbDeleteCerto": {
 		"prefix": "DbDelete",
 		"body": [
-			"${0:xTab}->(DbDelete())"
+			"(${0:xTab})->(DbDelete())"
 		]
 	},
 	"DbGoToCerto": {
 		"prefix": "DbGoTo",
 		"body": [
-			"${1:xTab}->(DbGoTo($0))"
+			"(${1:xTab})->(DbGoTo($0))"
 		]
 	},
 	"PosicioneCerto": {
@@ -322,7 +309,7 @@
 	"DbGoTopCerto": {
 		"prefix": "DbGoTop",
 		"body": [
-			"${0:xTab}->(DbGoTop())"
+			"(${0:xTab})->(DbGoTop())"
 		]
 	},
 	"EoFCerto": {
@@ -340,7 +327,7 @@
 	"TFileDialogCerto": {
 		"prefix": "TFileDialog",
 		"body": [
-			"TFileDialog( 'All files (*) | All Text files (*.txt)' /*cMascar*/, '' /*cTitulo*/,, '' /*cDirInicial*/, .T. /*lSalvar*/, /*nOpcoes*/) //GETFMULTISELECT //GETF_RETDIRECTORY ",
+			"TFileDialog( 'All files (*) | All Text files (*.txt)' /*cMascar*/, '' /*cTitulo*/,, '' /*cDirInicial*/, .F. /*lSalvar*/, GETF_NOCHANGEDIR + GETF_LOCALFLOPPY + GETF_LOCALHARD + GETF_NETWORKDRIVE + GETF_RETDIRECTORY /*nOpcoes*/) "
 		]
-	},
+	}
 }

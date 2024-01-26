@@ -85,11 +85,14 @@
 		"body": [
 			"Local aParamBox := {}",
 			" ",
-			"aAdd(aParamBox, {1, '' /*cDescri*/, Ctod(Space(8)) /*xIni*/, '' /*cMascara*/, '' /*cValid*/, '' /*cF3*/, '' /*cWhen*/, 50 /*nTamanho*/, .F. /*lObrig*/}) //MsGet",
-			"aAdd(aParamBox, {2, '' /*cDescri*/, 1 /*nIni*/, {'S=Nao', 'N=Nao'} /*aCombo*/, 50 /*nTamanho*/, '' /*cValid*/, .F. /*lObrig*/}) //Combo",
+			"aAdd(aParamBox, {1, '' /*cDescri*/, '' /*cIni*/, '' /*cMascara*/, '' /*cValid*/, '' /*cF3*/, '' /*cWhen*/, 50 /*nTamanho*/, .F. /*lObrig*/}) //MsGet",
+			"aAdd(aParamBox, {2, '' /*cDescri*/, 1 /*nIni*/, {'S=Sim', 'N=Nao'} /*aCombo*/, 50 /*nTamanho*/, '' /*cValid*/, .F. /*lObrig*/}) //Combo",
+			"aAdd(aParamBox, {3, '' /*cDescri*/, 1 /*nIni*/, {'Sim', 'Nao'} /*aCombo*/, 50 /*nTamanho*/, '' /*cValid*/, .F. /*lObrig*/}) //Radio",
 			"aAdd(aParamBox, {4, '' /*cDescri*/, .F. /*lIni*/, '' /*cCheckBox*/, 90 /*nTamanho*/, '' /*cValid*/, .F. /*lObrig*/}) //Say + CheckBox",
 			"aAdd(aParamBox, {5, '' /*cDescri*/, .F. /*lIni*/, 50 /*nTamanho*/, '' /*cValid*/, .F. /*lObrig*/}) //CheckBox",
-			"aAdd(aParamBox, {6, '' /*cDescri*/, Space(50) /*cIni*/, '' /*cMascara*/, '' /*cValid*/, '' /*cWhen*/, 50 /*nTamanho*/, .F. /*lObrig*/, 'Todos os arquivos (*.*) |*.*' /*cTipo*/, '' /*cIniDir*/, nOR( GETF_LOCALHARD, GETF_LOCALFLOPPY, GETF_RETDIRECTORY ) /*xParams*/}) //File",
+			"aAdd(aParamBox, {6, '' /*cDescri*/, Space(100) /*cIni*/, '' /*cMascara*/, '' /*cValid*/, '' /*cWhen*/, 50 /*nTamanho*/, .F. /*lObrig*/, 'Todos os arquivos (*.*) |*.*' /*cTipo*/, '' /*cIniDir*/, nOR( GETF_LOCALHARD, GETF_LOCALFLOPPY, GETF_RETDIRECTORY ) /*nParams*/}) //File",
+			"aAdd(aParamBox, {8, '' /*cDescri*/, '' /*cIni*/, '' /*cMascara*/, '' /*cValid*/, '' /*cF3*/, '' /*cWhen*/, 50 /*nTamanho*/, .F. /*lObrig*/} //MsGet Password",
+			"aAdd(aParamBox, {10, '' /*cDescri*/, '' /*cIni*/, '' /*cF3*/, '' /*nTamanho*/, 'C' /*cTipo*/, 6 /*nSpace*/, '.F.' /*cWhen*/} //Range",
 			"aAdd(aParamBox, {11,'' /*cDescri*/, '' /*cIni*/, '' /*cValid*/, '' /*cWhen*/, .F. /*lObrig*/}) //Memo",
 			"",
 			"If Parambox(aParamBox, '' /*cTitle*/,, {|| .T.} /*bValid*/)",
@@ -239,9 +242,9 @@
 	"InnerJoinCerto": {
 		"prefix": "Inner Join",
 		"body": [
-			"cQuery += \" INNER JOIN \" + RetSQLName(\"$0\") + \" $0 ON     \" + CRLF",
-			"cQuery += \"     $0.$0_FILIAL = '\" + xFilial(\"$0\") + \"'    \" + CRLF",
-			"cQuery += \"     $0.D_E_L_E_T_ = ' '                        \" + CRLF"
+			"cQuery += \" INNER JOIN \" + RetSQLName(\"$0\") + \" $0 ON  \" + CRLF",
+			"cQuery += \"     $0.$0_FILIAL = '\" + xFilial(\"$0\") + \"' \" + CRLF",
+			"cQuery += \"     AND $0.D_E_L_E_T_ = ' '                    \" + CRLF"
 		]
 	},
 	"xFilialCerto": {
@@ -253,13 +256,13 @@
 	"DbSeekCerto": {
 		"prefix": "DbSeek",
 		"body": [
-			"(${1:xTab})->(DbSeek(xFilial(\"${1:xTab}\") + $0))"
+			"${1:xTab}->(DbSeek(xFilial(\"${1:xTab}\") + $0))"
 		]
 	},
 	"DbCloseCerto": {
 		"prefix": "DbCloseArea",
 		"body": [
-			"(${0:xTab})->(DbCloseArea())"
+			"${0:xTab}->(DbCloseArea())"
 		]
 	},
 	"DbSelectAreaCerto": {
@@ -273,7 +276,7 @@
 	"DbSetOrderCerto": {
 		"prefix": "DbSetOrder",
 		"body": [
-			"(${1:xTab})->(DbSetOrder($0))"
+			"${1:xTab}->(DbSetOrder($0))"
 		]
 	},
 	"MsgRunCerto": {
@@ -282,16 +285,24 @@
 			"MsgRun(\"${1:Aguardando}...\", \"${2:Titulo}\", {|| $0})"
 		]
 	},
+	"FWMsgRunCerto": {
+		"prefix": "FWMsgRun",
+		"body": [
+			"FWMsgRun( , {|oRun| ${1:fFunction}}, '$2', '$0')",
+			"oRun:SetText('')",
+			"ProcessMessages()"
+		]
+	},
 	"DbDeleteCerto": {
 		"prefix": "DbDelete",
 		"body": [
-			"(${0:xTab})->(DbDelete())"
+			"${0:xTab}->(DbDelete())"
 		]
 	},
 	"DbGoToCerto": {
 		"prefix": "DbGoTo",
 		"body": [
-			"(${1:xTab})->(DbGoTo($0))"
+			"${1:xTab}->(DbGoTo($0))"
 		]
 	},
 	"PosicioneCerto": {
@@ -309,13 +320,13 @@
 	"DbGoTopCerto": {
 		"prefix": "DbGoTop",
 		"body": [
-			"(${0:xTab})->(DbGoTop())"
+			"${0:xTab}->(DbGoTop())"
 		]
 	},
 	"EoFCerto": {
 		"prefix": "EoF",
 		"body": [
-			"(${0:xTab})->(!EoF())"
+			"${0:xTab}->(!EoF())"
 		]
 	},
 	"JsonObjectCerto": {

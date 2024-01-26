@@ -13,6 +13,9 @@
 User Function FNUM(cAlias, cCampo)
     
     Local cNum := ''
+
+    Default cAlias := ''
+    Default cCampo := ''
     
     If Select(cAlias) == 0
         DbSelectArea(cAlias)
@@ -20,9 +23,9 @@ User Function FNUM(cAlias, cCampo)
 
     cNum := GetSxeNum(cAlias, cCampo)
 
-    DA4->(DbSetOrder(1))
+    (cAlias)->(DbSetOrder(1))
 
-    While DA4->(DbSeek(xFilial("DA4") + cNum))
+    While (cAlias)->(DbSeek(xFilial(cAlias) + cNum))
         ConfirmSX8()
         cNum := GetSxeNum(cAlias, cCampo)
     EndDo
